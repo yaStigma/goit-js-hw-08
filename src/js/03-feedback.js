@@ -1,3 +1,4 @@
+import throttle from "lodash.throttle";
 
 import { saveToLS, loadFromLS } from "./helpers";
 
