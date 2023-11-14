@@ -1,13 +1,13 @@
 import throttle from "lodash.throttle";
 
 import { saveToLS, loadFromLS } from "./helpers";
-
+const THROTTLE_TIME = 500;
 
 const refs = {
     formELem: document.querySelector(".feedback-form"),
 };
 
-refs.formELem.addEventListener("input", onFormInput);
+refs.formELem.addEventListener("input", throttle(onFormInput, THROTTLE_TIME));
 refs.formELem.addEventListener("submit", onFormSubmit)
 
 
