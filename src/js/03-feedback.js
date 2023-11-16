@@ -14,9 +14,12 @@ refs.formELem.addEventListener("submit", onFormSubmit)
 function onFormInput(e) {
     const key = e.target.name;
     const value = e.target.value;
+        // saveToLS(key, value);
+     const feedbackFormState = loadFromLS("feedback-form-state") || {};
+    feedbackFormState[key] = value;
     
-    saveToLS(key, value);
-};
+saveToLS("feedback-form-state", feedbackFormState);
+}
 
 function onFormSubmit(e) {
     e.preventDefault();
@@ -30,16 +33,15 @@ function onFormSubmit(e) {
 
     console.log(obj);
     e.target.reset();
-    localStorage.removeItem("email");
-    localStorage.removeItem("message");
+    localStorage.removeItem("feedback-form-state");
+    
 }
 
 function onLoad() {
-    const email = loadFromLS("email");
-    const message = loadFromLS("message");
+   const feedbackFormState = loadFromLS("feedback-form-state");
 
-    refs.formELem.elements.email.value = email ; //   || 'Введіть Email'
-    refs.formELem.elements.message.value = message;
+    refs.formELem.elements.email.value = feedbackFormState.email ; //   || 'Введіть Email'
+    refs.formELem.elements.message.value = feedbackFormState.message;
 
 }
 
